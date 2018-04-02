@@ -6,7 +6,7 @@ Google BigQuery support for Spark SQL
 
 | spark-bigquery | Spark | Scala |
 | :-----: | ----- | ----- |
-| 0.1 | 2.2 | 2.11 |
+| 0.1 | 2.1 | 2.11 |
 
 ## Usage
 
