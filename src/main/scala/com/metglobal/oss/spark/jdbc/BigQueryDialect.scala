@@ -1,8 +1,9 @@
 package com.metglobal.oss.spark.jdbc
 
+import java.sql.{JDBCType, SQLException, Types}
+
 import org.apache.spark.sql.jdbc.JdbcDialect
 import org.apache.spark.sql.types._
-import java.sql.Types
 
 case object BigQueryDialect extends JdbcDialect {
   override def canHandle(url: String): Boolean = url.startsWith("jdbc:bigquery")
@@ -11,9 +12,15 @@ case object BigQueryDialect extends JdbcDialect {
                                typeName: String,
                                size: Int,
                                md: MetadataBuilder): Option[DataType] = {
-    sqlType match {
-      case Types.VARCHAR =>
+    val decision = sqlType match {
+      case Types.ARRAY => None
     }
+
+    if (decision.isEmpty) {
+      throw new SQLException(s"Unsupported type ${JDBCType.valueOf(sqlType).getName}")
+    }
+
+    decision
   }
 
   override def getTableExistsQuery(table: String): String = {
