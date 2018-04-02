@@ -13,6 +13,8 @@ Google BigQuery support for Spark SQL
 ### Scala 2.11
 
 ```scala
+import com.metglobal.oss.spark.jdbc._
+
 // Register BigQuery dialect
 JdbcDialects.registerDialect(BigQueryDialect)
 
